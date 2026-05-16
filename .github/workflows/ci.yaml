@@ -24,7 +24,9 @@ jobs:
 
     # בניית האימג' והעלאה ל-GHCR
     - name: Build and Push Docker Image
-      run: |
-        # שם ה-Image חייב להכיל את שם המשתמש/הארגון בגיטהאב
-        docker build -t ghcr.io/USERNAME/my-python-app:latest .
-        docker push ghcr.io/USERNAME/my-python-app:latest
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
